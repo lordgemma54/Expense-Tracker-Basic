@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+
+ <GridPane fx:id="detailView" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.DetailListViewController">
+     <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="66.0" />
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="234.0" />
+     </columnConstraints>
+     <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+     <children>
+         <Label fx:id="itemDetailView" text="Item" />
+         <Label fx:id="amountDetailView" text="Amount" GridPane.rowIndex="1" />
+         <Label fx:id="categoryDetailView" text="Category" GridPane.rowIndex="2" />
+         <Label fx:id="noteDetailView" text="Note" GridPane.rowIndex="3" />
+         <Label fx:id="itemInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+         <Label fx:id="amountInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+         <Label fx:id="categoryInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+         <Label fx:id="noteInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+     </children>
+ </GridPane>
