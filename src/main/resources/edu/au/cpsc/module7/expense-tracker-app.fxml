@@ -5,12 +5,12 @@
 <BorderPane xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.ExpenseTrackerAppController">
 
    <bottom>
-      <fx:include source="detail-list-view.fxml" />
+      <fx:include fx:id="detailListController" source="detail-list-view.fxml" />
    </bottom>
    <center>
-      <fx:include source="transaction-list-view.fxml" />
+      <fx:include fx:id="transactionListController" source="transaction-list-view.fxml" />
    </center>
    <top>
-      <fx:include source="totals-list-view.fxml" />
+      <fx:include fx:id="totalsListController" source="totals-list-view.fxml" />
    </top>
 </BorderPane>

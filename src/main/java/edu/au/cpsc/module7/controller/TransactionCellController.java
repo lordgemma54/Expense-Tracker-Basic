@@ -19,19 +19,37 @@ public class TransactionCellController {
 
     private Transaction transaction;
 
-    public void initialize(){}
+    private TransactionClickListener clickListener;
 
-    public void setTransactionCellItemLabel(String item) {
-        transactionCellItemLabel.textProperty().set(transaction.getItem());
+
+    public void setClickListener(TransactionClickListener listener) {
+        this.clickListener = listener;
     }
 
     public void setTransactionCellAmountLabel(double amount) {
         transactionCellAmountLabel.textProperty().set("$" + String.valueOf(transaction.getAmount()));
     }
 
+        public void initialize(){
+        transactionCell.setOnMouseClicked(event -> {
+            if(clickListener != null) {
+                clickListener.onTransactionClicked(transaction);
+            }
+        });
+        }
+
+
+    public void setTransactionCellItemLabel(String item) {
+        transactionCellItemLabel.textProperty().set(transaction.getItem());
+    }
+
 //      handle all styling here
-//      call the edit/create dialog here
+//    handle all click events
+//    show detail view when a cell is clicked
+//      call the edit/create dialog when edit btn is pressed
 //    tell the transactionsListController to remove the cell when delete is pressed
+
+
 
     public void setTransaction (Transaction t) {
         this.transaction = t;
@@ -40,4 +58,11 @@ public class TransactionCellController {
         transactionCellEditButton = new Button();
         transactionCellDeleteButton = new Button();
     }
+
+//    @FXML
+//    private void handleClick() {
+//        if(onTransactionSelected != null) {
+//            onTransactionSelected.accept(transaction);
+//        }
+//    }
 }
