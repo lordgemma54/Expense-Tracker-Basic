@@ -11,6 +11,8 @@ public class Transaction {
     private String note;
     private double amount;
 
+    public Transaction() {}
+
     public Transaction(String item, String category, String note, double amount) {
             this.item = item;
             this.category = category;

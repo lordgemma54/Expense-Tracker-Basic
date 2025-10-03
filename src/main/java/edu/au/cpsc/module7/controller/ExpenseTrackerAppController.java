@@ -13,22 +13,23 @@ public class ExpenseTrackerAppController {
     private Label itemLabel, amountLabel;
 
     @FXML
-    private Label itemDetailView, amountDetailView, categoryDetailView, noteDetailView;
-
-    @FXML
-    private Label itemInfoDetail, amountInfoDetail, categoryInfoDetail, noteInfoDetail;
-
-    @FXML
     private Button editButton, deleteButton, exportButton, newButton;
 
     @FXML
     private MenuItem file, edit;
 
-//    @FXML
+    @FXML
+    private TransactionListController transactionListController;
+
+    @FXML
+    private TotalsListController totalsListController;
+
+    @FXML
+    private DetailListViewController detailViewController;
 
 
-//    @FXML
-//    protected void onHelloButtonClick() {
-//        welcomeText.setText("Welcome to JavaFX Application!");
-//    }
+    @FXML
+    public void initialize() {
+
+            }
 }
