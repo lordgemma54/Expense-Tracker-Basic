@@ -26,6 +26,16 @@ public class DetailListViewController {
         amountInfoDetail.textProperty().set(String.valueOf(t.getAmount()));
         categoryInfoDetail.textProperty().set(t.getCategory());
         noteInfoDetail.textProperty().set(t.getNote());
+    }
 
+    public void updateTransaction() {
+
+    }
+
+    public void clearDetails() {
+        itemInfoDetail.setText("");
+        amountInfoDetail.setText("");
+        categoryInfoDetail.setText("");
+        noteInfoDetail.setText("");
     }
 }

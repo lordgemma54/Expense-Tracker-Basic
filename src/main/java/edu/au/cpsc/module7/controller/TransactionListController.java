@@ -16,30 +16,36 @@ public class TransactionListController {
 
     private TransactionClickListener clickListener;
 
+    private TransactionDeletedCallback deletedCallback;
+
     @FXML
     private HBox cellButtonHBox;
 
 
     public void initialize() throws IOException {
 
-        System.out.println("transactionList: " + transactionList);
-        //demo transactions
-        Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
-        Transaction t2 = new Transaction("ipad", "electronics", "for school", 975.50 );
-        Transaction t3 = new Transaction("TP", "staples", "for butts", 17.85);
-        Transaction t4 = new Transaction("paycheck", "income", "for my sweat", 2000 );
-        //controllers are instantiated by the fxml loader, so this line wont work
-//        TransactionListController c = new TransactionListController();
-        addNewTransactionCell(t1);
-        addNewTransactionCell(t2);
-        addNewTransactionCell(t3);
-        addNewTransactionCell(t4);
+//        System.out.println("transactionList: " + transactionList);
+//        //demo transactions
+//        Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
+//        Transaction t2 = new Transaction("ipad", "electronics", "for school", 975.50 );
+//        Transaction t3 = new Transaction("TP", "staples", "for butts", 17.85);
+//        Transaction t4 = new Transaction("paycheck", "income", "for my sweat", 2000 );
+//        //controllers are instantiated by the fxml loader, so this line wont work
+////        TransactionListController c = new TransactionListController();
+//        addNewTransactionCell(t1);
+//        addNewTransactionCell(t2);
+//        addNewTransactionCell(t3);
+//        addNewTransactionCell(t4);
     }
 
 
 
     public void setClickListener(TransactionClickListener listener) {
         this.clickListener = listener;
+    }
+
+    public void setDeletedCallback(TransactionDeletedCallback callback) {
+        this.deletedCallback = callback;
     }
 
 //    probably just need to implement something here that creates new list cells with each new transaction
@@ -56,6 +62,16 @@ public void addNewTransactionCell(Transaction t){
         cellController.setTransaction(t);
 
         cellController.setClickListener(clickListener);
+
+        cellController.setDeleteListener((transaction, cellNode) -> {
+            transactionList.getChildren().remove(cellNode);
+
+//            deleteFromModel(transaction);
+            if(deletedCallback != null) {
+                deletedCallback.onTransactionDeleted(transaction);
+            }
+//            updateTotalsAfterDelete(transaction);
+        });
 //        button event handling here
 
         System.out.println("cell added");

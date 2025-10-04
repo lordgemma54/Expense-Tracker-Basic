@@ -20,10 +20,15 @@ public class TransactionCellController {
     private Transaction transaction;
 
     private TransactionClickListener clickListener;
+    private TransactionDeleteListener deleteListener;
 
 
     public void setClickListener(TransactionClickListener listener) {
         this.clickListener = listener;
+    }
+
+    public void setDeleteListener(TransactionDeleteListener listener) {
+        this.deleteListener = listener;
     }
 
     public void setTransactionCellAmountLabel(double amount) {
@@ -36,6 +41,12 @@ public class TransactionCellController {
                 clickListener.onTransactionClicked(transaction);
             }
         });
+
+        transactionCellDeleteButton.setOnAction(event -> {
+            if(deleteListener != null) {
+                deleteListener.onTransactionDelete(transaction, transactionCell);
+            }
+        });
         }
 
 
@@ -45,7 +56,7 @@ public class TransactionCellController {
 
 //      handle all styling here
 //    handle all click events
-//    show detail view when a cell is clicked
+//    show detail view when a cell is clicked-----------
 //      call the edit/create dialog when edit btn is pressed
 //    tell the transactionsListController to remove the cell when delete is pressed
 
@@ -55,14 +66,32 @@ public class TransactionCellController {
         this.transaction = t;
         setTransactionCellItemLabel(t.getItem());
         setTransactionCellAmountLabel(t.getAmount());
-        transactionCellEditButton = new Button();
-        transactionCellDeleteButton = new Button();
+//        transactionCellEditButton = new Button();
+//        transactionCellDeleteButton = new Button();
     }
 
-//    @FXML
-//    private void handleClick() {
+    @FXML
+    private void handleCellClick() {
 //        if(onTransactionSelected != null) {
 //            onTransactionSelected.accept(transaction);
 //        }
-//    }
+
+        System.out.println("cell clicked!");
+        if(clickListener != null) {
+            clickListener.onTransactionClicked(transaction);
+        }
+    }
+
+    @FXML
+    private void onDeleteButtonClicked(){
+        System.out.println("deleteButtonClicked");
+        if(clickListener != null) {
+
+        }
+    }
+
+    @FXML
+    private void onEditButtonClicked(){
+        System.out.println("editButtonClicked");
+    }
 }

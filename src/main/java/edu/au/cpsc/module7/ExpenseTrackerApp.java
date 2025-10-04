@@ -14,6 +14,7 @@ public class ExpenseTrackerApp extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Rahul Venkatesh's Expense Tracker");
         stage.setScene(scene);
+        stage.setMinWidth(400);
         stage.show();
     }
 }
