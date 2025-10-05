@@ -5,6 +5,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -22,6 +23,9 @@ public class DetailListViewController {
 
     @FXML
     private AnchorPane detailListViewRoot;
+
+    @FXML
+    private Button hideButton;
 
     private boolean isShown = false;
 //    private double hiddenPosition;
@@ -102,4 +106,10 @@ public class DetailListViewController {
         categoryInfoDetail.setText("");
         noteInfoDetail.setText("");
     }
+
+    @FXML
+    protected void onHideButtonClicked(){
+        hideDetailView();
+    }
+
 }
