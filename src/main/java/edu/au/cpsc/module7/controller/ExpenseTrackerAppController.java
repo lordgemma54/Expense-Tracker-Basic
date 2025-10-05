@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 
+import java.io.IOException;
+
 public class ExpenseTrackerAppController  {
     @FXML
     private Label currentBalanceLabel, totalIncomeLabel, totalExpensesLabel;
@@ -28,6 +30,9 @@ public class ExpenseTrackerAppController  {
     @FXML
     private DetailListViewController detailListViewController;
 
+    private Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
+
+
 //    do all coordination here - ie. when a row is clicked, tell detailistView to show transactions
 
     @FXML
@@ -40,7 +45,7 @@ public class ExpenseTrackerAppController  {
     transactionListController.setDeletedCallback(transaction -> {
     detailListViewController.clearDetails();
 });
-    Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
+//    Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
     Transaction t2 = new Transaction("ipad", "electronics", "for school", 975.50 );
     Transaction t3 = new Transaction("TP", "staples", "for butts", 17.85);
     Transaction t4 = new Transaction("paycheck", "income", "for my sweat", 2000 );
@@ -50,6 +55,11 @@ public class ExpenseTrackerAppController  {
         transactionListController.addNewTransactionCell(t3);
         transactionListController.addNewTransactionCell(t4);
 
+    }
+
+    @FXML
+    protected void editCreateWindowPopup() throws IOException {
+        EditCreateWindowController.showModal(t1);
     }
 
 }
