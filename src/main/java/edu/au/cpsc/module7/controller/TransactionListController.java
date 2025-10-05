@@ -4,8 +4,10 @@ import edu.au.cpsc.module7.model.Transaction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 import java.io.IOException;
 
@@ -21,8 +23,13 @@ public class TransactionListController {
     @FXML
     private HBox cellButtonHBox;
 
+    @FXML
+    private Button addNewTransactionButton;
+
 
     public void initialize() throws IOException {
+    addNewTransactionButton.setOnAction(event -> openCreateWindow());
+
 
 //        System.out.println("transactionList: " + transactionList);
 //        //demo transactions
@@ -48,55 +55,111 @@ public class TransactionListController {
         this.deletedCallback = callback;
     }
 
-//    probably just need to implement something here that creates new list cells with each new transaction
-
-public void addNewTransactionCell(Transaction t){
-    try {
+    public void addNewTransactionCell(Transaction t){
+        try {
 //        URL fxmlLocation = getClass().getResource("/edu/au/cpsc/module7/transaction-cell.fxml");
 //        System.out.println("FXML path; " + fxmlLocation);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/au/cpsc/module7/transaction-cell.fxml"));
-        Node transactionCell = loader.load();
-        TransactionCellController cellController = loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/au/cpsc/module7/transaction-cell.fxml"));
+            Node transactionCell = loader.load();
+            TransactionCellController cellController = loader.getController();
 
-        cellController.setTransaction(t);
+            cellController.setTransaction(t);
 
-        cellController.setClickListener(clickListener);
+            cellController.setClickListener(clickListener);
 
-        cellController.setDeleteListener((transaction, cellNode) -> {
-            transactionList.getChildren().remove(cellNode);
+//            ----------------------Delete-------------------------------------
 
-//            deleteFromModel(transaction);
-            if(deletedCallback != null) {
-                deletedCallback.onTransactionDeleted(transaction);
-            }
+            cellController.setDeleteListener((transaction, cellNode) -> {
+                transactionList.getChildren().remove(cellNode);
+                if(deletedCallback != null) {
+                    deletedCallback.onTransactionDeleted(transaction);
+                }
 //            updateTotalsAfterDelete(transaction);
-        });
-//        button event handling here
+            });
 
-        System.out.println("cell added");
+//            ----------------------Edit-------------------------------------
+            cellController.setEditCreateListener(new EditCreateListener() {
+                @Override
+                public void onEdit(Transaction transaction) {
+                    try{
+                        Window owner = addNewTransactionButton.getScene().getWindow();
+                        Transaction updatedTransaction = EditCreateWindowController.showModal(transaction, owner);
 
-        transactionList.getChildren().addAll(transactionCell);
-    }catch (IOException e) {
-        e.printStackTrace();
+                        if(updatedTransaction != null) {
+                            cellController.setTransaction(updatedTransaction);
+
+                            if(clickListener != null) {
+                                clickListener.onTransactionClicked(updatedTransaction);
+                            }
+                            System.out.println("transaction updated");
+                        }
+                    }catch (IOException ioe) {
+                        ioe.printStackTrace();
+                    }
+
+                }
+                public void onSave(Transaction transaction, boolean isNew) {}
+            });
+
+
+
+            transactionList.getChildren().addAll(transactionCell);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 
-//private void transactionSelected() {
-//        Transaction selectedTransaction = transactionList.getSelectionModel().getSelected();
+
+    private void openCreateWindow() {
+    try{
+        Window ownerWindow = addNewTransactionButton.getScene().getWindow();
+        Transaction newTransaction = EditCreateWindowController.showModal(null, ownerWindow);
+
+        if(newTransaction != null) {
+            addNewTransactionCell(newTransaction);
+            System.out.println("New Transaction added: " + newTransaction.getItem());
+
+            if(clickListener != null) {
+                clickListener.onTransactionClicked(newTransaction);
+            }
+        }
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    }
+
+
+//private void openEditWindow(Transaction transaction, Node cellNode) {
+//        try{
+//           Window ownerWindow = addNewTransactionButton.getScene().getWindow();
+//
+//            Transaction updatedTransaction = EditCreateWindowController.showModal(transaction, ownerWindow);
+//
+//            if(updatedTransaction != null) {
+//                if(clickListener != null) {
+//                    clickListener.onTransactionClicked(updatedTransaction);
+//                }
+//                System.out.println("Transaction updated: " + updatedTransaction.getItem());
+//            }
+//
+//
+//        }catch (IOException ioe) {
+//            ioe.printStackTrace();
+//        }
 //
 //}
 
-public void deleteTransaction(Transaction t) {
-        transactionList.getChildren().remove(t);
-
-}
+//public void deleteTransaction(Transaction t) {
+//        transactionList.getChildren().remove(t);
+//
+//}
 
 //    public void showTransaction(Transaction t) {
 //        detailListViewController.showTransaction(t);
 //    }
 
 //    because you must call this method to connect the two views
-    public void setDetailListViewController(DetailListViewController detailViewController) {
-    }
+//    public void setDetailListViewController(DetailListViewController detailViewController) {
+//    }
 }

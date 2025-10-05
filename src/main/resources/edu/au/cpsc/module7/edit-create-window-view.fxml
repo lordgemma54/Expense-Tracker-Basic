@@ -34,7 +34,7 @@
             <Label fx:id="noteCreateLabel" text="Note" GridPane.rowIndex="3" />
             <TextField fx:id="itemCreateTextField" GridPane.columnIndex="1" />
             <TextField fx:id="amountCreateTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="caategoryCreateTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="categoryCreateTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="noteCreateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <RadioButton fx:id="incomeRadioButton" mnemonicParsing="false" text="Income" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <RadioButton fx:id="expenseRadioButton" mnemonicParsing="false" text="Expense" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />

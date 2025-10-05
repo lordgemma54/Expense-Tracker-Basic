@@ -6,4 +6,6 @@ public interface EditCreateListener {
     void onSave(Transaction transaction, boolean isNew);
 
     default void onCancel(){}
+
+    default void onEdit(Transaction transacton){}
 }

@@ -59,7 +59,7 @@ public class ExpenseTrackerAppController  {
 
     @FXML
     protected void editCreateWindowPopup() throws IOException {
-        EditCreateWindowController.showModal(t1);
+        EditCreateWindowController.showModal(t1, editButton.getScene().getWindow());
     }
 
 }

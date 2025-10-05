@@ -32,6 +32,7 @@ public class EditCreateWindowController {
     //    -------------------------------new stuff from last night---------------------------------
     private EditCreateListener listener;
     private boolean isNew = true;
+    private boolean saved = false;
     private Transaction editingTransaction;
 
 
@@ -44,6 +45,8 @@ public class EditCreateWindowController {
             this.isNew = true;
             this.editingTransaction = null;
             clearFields();
+
+//            editingTransaction = new Transaction("", "", "", 0);
         }
     }
 
@@ -69,7 +72,7 @@ private void populateFields(Transaction t) {
 }
 
 private void clearFields() {
-    itemCreateTextfield.clear();
+    itemCreateTextField.clear();
     amountCreateTextField.clear();
     categoryCreateTextField.clear();
     noteCreateTextField.clear();
@@ -91,8 +94,8 @@ private void onSave() {
         }
 
         if(isNew) {
-            Transaction newTransaction = new Transaction(item, category, note, amount);
-            if(listener != null) listener.onSave(newTransaction, true);
+            editingTransaction = new Transaction(item, category, note, amount);
+            if(listener != null) listener.onSave(editingTransaction, true);
         } else {
             editingTransaction.setItem(item);
             editingTransaction.setCategory(category);
@@ -101,6 +104,7 @@ private void onSave() {
             if (listener != null) listener.onSave(editingTransaction, false);
         }
 
+        saved = true;
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
 }
@@ -115,29 +119,34 @@ private void onCancel() {
 
 //    -------------------------------new stuff from last night---------------------------------
 
-    public static EditCreateWindowController showModal(Transaction transaction, Window owner) throws IOException {
-        Stage stage = new Stage();
-        stage.setResizable(false);
+    public static Transaction showModal(Transaction transaction, Window owner) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/edit-create-window-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Transaction editor");
-
         EditCreateWindowController controller = fxmlLoader.getController();
-        controller.editTransaction(transaction);
+        controller.setTransactionToEdit(transaction);
+
+        Stage stage = new Stage();
+        stage.setTitle("Transaction editor");
+        stage.setResizable(false);
         stage.setScene(scene);
 
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(owner);
         stage.showAndWait();
 
-        stage.show();
+        if(controller.saved) {
+               return controller.editingTransaction;
+           } else {
+               return null;
+           }
+        }
+//        stage.show();
 //        returning null till i understand this better
-return null;
-    }
 
-    private void editTransaction(Transaction transaction) {
-    detailListViewController.showTransaction(transaction);
-    }
+
+//    private void editTransaction(Transaction transaction) {
+//    detailListViewController.showTransaction(transaction);
+//    }
 
 }
 

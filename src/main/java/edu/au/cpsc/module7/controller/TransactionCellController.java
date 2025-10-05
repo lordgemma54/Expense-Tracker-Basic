@@ -21,7 +21,7 @@ public class TransactionCellController {
 
     private TransactionClickListener clickListener;
     private TransactionDeleteListener deleteListener;
-
+    private EditCreateListener editListener;
 
     public void setClickListener(TransactionClickListener listener) {
         this.clickListener = listener;
@@ -29,6 +29,10 @@ public class TransactionCellController {
 
     public void setDeleteListener(TransactionDeleteListener listener) {
         this.deleteListener = listener;
+    }
+
+    public void setEditCreateListener(EditCreateListener listener) {
+        this.editListener = listener;
     }
 
     public void setTransactionCellAmountLabel(double amount) {
@@ -45,6 +49,12 @@ public class TransactionCellController {
         transactionCellDeleteButton.setOnAction(event -> {
             if(deleteListener != null) {
                 deleteListener.onTransactionDelete(transaction, transactionCell);
+            }
+        });
+
+        transactionCellEditButton.setOnAction(event -> {
+            if(editListener != null) {
+                editListener.onEdit(transaction);
             }
         });
         }
