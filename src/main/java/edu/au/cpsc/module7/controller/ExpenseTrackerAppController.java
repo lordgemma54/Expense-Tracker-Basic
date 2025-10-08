@@ -1,12 +1,13 @@
 package edu.au.cpsc.module7.controller;
 
 import edu.au.cpsc.module7.model.Transaction;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-
-import java.io.IOException;
 
 public class ExpenseTrackerAppController {
     @FXML
@@ -30,13 +31,20 @@ public class ExpenseTrackerAppController {
     @FXML
     private DetailListViewController detailListViewController;
 
-    private Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
+    private final ObservableList<Transaction> transactions = FXCollections.observableArrayList(t ->
+            new Observable[]{t.amountProperty()});
 
+
+public ObservableList<Transaction> getTransactions(){return transactions;}
 
 //    do all coordination here - ie. when a row is clicked, tell detailistView to show transactions
 
     @FXML
     public void initialize() {
+
+    transactionListController.setTransactions(transactions);
+    totalsListController.setTransactions(transactions);
+
         transactionListController.setClickListener(transaction -> {
             detailListViewController.showTransaction(transaction);
 
@@ -47,22 +55,27 @@ public class ExpenseTrackerAppController {
             detailListViewController.hideDetailView();
         });
 
+        transactions.addAll(new Transaction("boba", "food", "fun with friends", 7.00),
+        new Transaction("ipad", "electronics", "for school", 975.50),
+        new Transaction("TP", "staples", "for butts", 17.85),
+        new Transaction("paycheck", "income", "for my sweat", 2000));
+//);
 
-//    Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
-        Transaction t2 = new Transaction("ipad", "electronics", "for school", 975.50);
-        Transaction t3 = new Transaction("TP", "staples", "for butts", 17.85);
-        Transaction t4 = new Transaction("paycheck", "income", "for my sweat", 2000);
-//
-        transactionListController.addNewTransactionCell(t1);
-        transactionListController.addNewTransactionCell(t2);
-        transactionListController.addNewTransactionCell(t3);
-        transactionListController.addNewTransactionCell(t4);
+//        Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
+//        Transaction t2 = new Transaction("ipad", "electronics", "for school", 975.50);
+//        Transaction t3 = new Transaction("TP", "staples", "for butts", 17.85);
+//        Transaction t4 = new Transaction("paycheck", "income", "for my sweat", 2000);
+////
+//        transactionListController.addNewTransactionCell(t1);
+//        transactionListController.addNewTransactionCell(t2);
+//        transactionListController.addNewTransactionCell(t3);
+//        transactionListController.addNewTransactionCell(t4);
 
     }
 
-    @FXML
-    protected void editCreateWindowPopup() throws IOException {
-        EditCreateWindowController.showModal(t1, editButton.getScene().getWindow());
-    }
+//    @FXML
+//    protected void editCreateWindowPopup() throws IOException {
+//        EditCreateWindowController.showModal(t1, editButton.getScene().getWindow());
+//    }
 
 }

@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="transactionList" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.TransactionListController">
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.TransactionListController">
    <children>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="17.0" prefWidth="200.0" VBox.vgrow="NEVER">
          <children>
@@ -20,8 +21,10 @@
             </Button>
          </children>
       </HBox>
+      <VBox fx:id="transactionList">
+         <padding>
+            <Insets bottom="2.0" right="2.0" top="2.0" />
+         </padding>
+      </VBox>
    </children>
-   <padding>
-      <Insets bottom="2.0" right="2.0" top="2.0" />
-   </padding>
 </VBox>

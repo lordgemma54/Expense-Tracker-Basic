@@ -17,11 +17,19 @@ public class TransactionCellController {
     @FXML
     private HBox transactionCell;
 
+//    private static double cellAmount;
+
     private Transaction transaction;
 
     private TransactionClickListener clickListener;
     private TransactionDeleteListener deleteListener;
     private EditCreateListener editListener;
+
+//    public double getCellAmount(){
+//    cellAmount = Double.parseDouble(transactionCellAmountLabel.getText());
+//    return cellAmount;
+//    }
+
 
     public void setClickListener(TransactionClickListener listener) {
         this.clickListener = listener;
@@ -36,7 +44,8 @@ public class TransactionCellController {
     }
 
     public void setTransactionCellAmountLabel(double amount) {
-        transactionCellAmountLabel.textProperty().set("$" + String.valueOf(transaction.getAmount()));
+        String amountPrefix = amount < 0 ? "-$" : "$";
+        transactionCellAmountLabel.textProperty().set(amountPrefix + String.valueOf(amount));
     }
 
         public void initialize(){

@@ -1,5 +1,8 @@
 package edu.au.cpsc.module7.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 public class Transaction {
 
     private static double currentBalance;
@@ -9,16 +12,20 @@ public class Transaction {
     private String item;
     private String category;
     private String note;
-    private double amount;
+    private final DoubleProperty amount = new SimpleDoubleProperty();
+
+
 
     public Transaction() {}
 
     public Transaction(String item, String category, String note, double amount) {
-            this.item = item;
-            this.category = category;
-            this.note = note;
-            this.amount = amount;
+            setItem(item);
+            setCategory(category) ;
+            setNote(note);
+            setAmount(amount);
     }
+
+    public DoubleProperty amountProperty() {return amount;}
 
     public static double getCurrentBalance() {
         return currentBalance;
@@ -57,11 +64,11 @@ public class Transaction {
     }
 
     public double getAmount() {
-        return amount;
+        return amount.get();
     }
 
     public void setAmount(double amount) {
-        this.amount = amount;
+        this.amount.set(amount);
     }
 
 

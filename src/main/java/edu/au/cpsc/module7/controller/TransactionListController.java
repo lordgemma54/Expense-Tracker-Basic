@@ -1,6 +1,9 @@
 package edu.au.cpsc.module7.controller;
 
 import edu.au.cpsc.module7.model.Transaction;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,15 +23,22 @@ public class TransactionListController {
 
     private TransactionDeletedCallback deletedCallback;
 
+    private TransactionCellController transactionCellController;
+
     @FXML
     private HBox cellButtonHBox;
 
     @FXML
     private Button addNewTransactionButton;
 
+    private ObservableList<Transaction> transactions = FXCollections.observableArrayList();
 
     public void initialize() throws IOException {
     addNewTransactionButton.setOnAction(event -> openCreateWindow());
+
+//    for(Node cell : transactionList) {
+//        totalCellAmount += transactionCellController.getCellAmount();
+//    }
 
 
 //        System.out.println("transactionList: " + transactionList);
@@ -46,6 +56,34 @@ public class TransactionListController {
     }
 
 
+public void setTransactions(ObservableList<Transaction> transactions) {
+    this.transactions = transactions;
+//        new test:
+    transactionList.getChildren().clear();
+    for (Transaction t : transactions) {
+        addNewTransactionCell(t);
+    }
+
+    transactions.addListener((ListChangeListener<Transaction>) change -> {
+        while(change.next()) {
+            if(change.wasAdded()) {
+                for (Transaction t : change.getAddedSubList()) {
+                    addNewTransactionCell(t);
+                }
+            }
+//            if(change.wasRemoved())
+        }
+    });
+//    refreshTransactionCells();
+
+}
+//    private void refreshTransactionCells() {
+//        transactionList.getChildren().clear();
+//        for(Transaction t : transactions) {
+////        TransactionCellController cell = createTransactionCell(t);
+////        transactionList.getChildren().add(cell.getRoot());
+//        }
+//    }
 
     public void setClickListener(TransactionClickListener listener) {
         this.clickListener = listener;
@@ -56,7 +94,9 @@ public class TransactionListController {
     }
 
     public void addNewTransactionCell(Transaction t){
+//        transactions.add(t);
         try {
+
 //        URL fxmlLocation = getClass().getResource("/edu/au/cpsc/module7/transaction-cell.fxml");
 //        System.out.println("FXML path; " + fxmlLocation);
 
@@ -72,6 +112,7 @@ public class TransactionListController {
 
             cellController.setDeleteListener((transaction, cellNode) -> {
                 transactionList.getChildren().remove(cellNode);
+                transactions.remove(transaction);
                 if(deletedCallback != null) {
                     deletedCallback.onTransactionDeleted(transaction);
                 }
@@ -83,7 +124,9 @@ public class TransactionListController {
                 @Override
                 public void onEdit(Transaction transaction) {
                     try{
-                        Window owner = addNewTransactionButton.getScene().getWindow();
+                        Window owner = addNewTransactionButton.getScene() != null ? addNewTransactionButton.getScene().getWindow() : null;
+
+//                        Window owner = addNewTransactionButton.getScene().getWindow();
                         Transaction updatedTransaction = EditCreateWindowController.showModal(transaction, owner);
 
                         if(updatedTransaction != null) {
@@ -117,7 +160,8 @@ public class TransactionListController {
         Transaction newTransaction = EditCreateWindowController.showModal(null, ownerWindow);
 
         if(newTransaction != null) {
-            addNewTransactionCell(newTransaction);
+            transactions.add(newTransaction);
+//            addNewTransactionCell(newTransaction);
             System.out.println("New Transaction added: " + newTransaction.getItem());
 
             if(clickListener != null) {

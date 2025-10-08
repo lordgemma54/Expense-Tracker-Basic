@@ -93,6 +93,13 @@ private void onSave() {
             return;
         }
 
+//        -----------------------radio buttons----------------------------------
+    if(expenseRadioButton.isSelected()) {
+        amount = -Math.abs(amount);
+    }else if(incomeRadioButton.isSelected()) {
+        amount = Math.abs(amount);
+    }
+
         if(isNew) {
             editingTransaction = new Transaction(item, category, note, amount);
             if(listener != null) listener.onSave(editingTransaction, true);
@@ -126,6 +133,8 @@ private void onCancel() {
         controller.setTransactionToEdit(transaction);
 
         Stage stage = new Stage();
+        if(owner != null) stage.initOwner(owner);
+
         stage.setTitle("Transaction editor");
         stage.setResizable(false);
         stage.setScene(scene);

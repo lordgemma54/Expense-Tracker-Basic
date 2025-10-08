@@ -2,6 +2,7 @@ module edu.au.cpsc.module7 {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires javafx.base;
 //    requires edu.au.cpsc.module7;
 
 
