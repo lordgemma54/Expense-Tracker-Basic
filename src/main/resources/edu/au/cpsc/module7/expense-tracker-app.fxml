@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="applicationRoot" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.ExpenseTrackerAppController">
+<BorderPane fx:id="applicationRoot" stylesheets="@style/LightTheme.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.ExpenseTrackerAppController">
 
    <bottom>
       <fx:include fx:id="detailListView" source="detail-list-view.fxml" />

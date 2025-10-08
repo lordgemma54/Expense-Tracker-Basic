@@ -1,0 +1,64 @@
+.root {
+    -fx-background-color: aliceblue;
+    /*-fx-background-color: gainsboro;*/
+}
+
+
+.button:hover{
+    -fx-opacity: 0.7;
+}
+.button.delete-button {
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.button.cancel-button {
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.button.save-button {
+    -fx-background-color: paleturquoise;
+    -fx-text-fill: teal;
+    -fx-font-weight: bold;
+}
+
+.button.edit-button {
+    -fx-background-color: paleturquoise;
+    -fx-text-fill: teal;
+    -fx-font-weight: bold;
+}
+
+.button.hide-button {
+    -fx-background-color: paleturquoise;
+    -fx-text-fill: teal;
+    -fx-font-weight: bold;
+}
+
+.button.add-button{
+    -fx-background-color: transparent;
+}
+
+.transaction-cell{
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 5;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.transaction-cell:selected {
+    -fx-background-color: #c0c0c0;
+}
+
+.selected-cell{
+    -fx-background-color:black;
+}
+
+/*.detail-view{*/
+/*    -fx-background-color: #b0b0b0;*/
+/*    fx-padding: 10;*/
+/*    -fx-border-radius: 6;*/
+/*    -fx-background-radius: 6;*/
+/*}*/
+

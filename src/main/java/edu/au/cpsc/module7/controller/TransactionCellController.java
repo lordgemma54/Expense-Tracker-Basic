@@ -17,6 +17,8 @@ public class TransactionCellController {
     @FXML
     private HBox transactionCell;
 
+    private boolean selected = false;
+
 //    private static double cellAmount;
 
     private Transaction transaction;
@@ -116,5 +118,13 @@ public class TransactionCellController {
     @FXML
     private void onEditButtonClicked(){
         System.out.println("editButtonClicked");
+    }
+
+    public void setSelected(boolean selected) {
+        if(selected) {
+            transactionCell.getStyleClass().add("selected-cell");
+        } else {
+            transactionCell.getStyleClass().remove("selected-cell");
+        }
     }
 }

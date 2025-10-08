@@ -132,7 +132,7 @@ private void onCancel() {
         EditCreateWindowController controller = fxmlLoader.getController();
         controller.setTransactionToEdit(transaction);
 
-
+        scene.getStylesheets().clear();
 
         String cssUrl = darkTheme ? EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/style/DarkTheme.css").toExternalForm() :
                 EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/style/LightTheme.css").toExternalForm();
@@ -145,6 +145,8 @@ private void onCancel() {
         stage.setTitle("Transaction editor");
         stage.setResizable(false);
         stage.setScene(scene);
+
+//        scene.getStylesheets().add(EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/style/LightTheme.css").toExternalForm());
 
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(owner);

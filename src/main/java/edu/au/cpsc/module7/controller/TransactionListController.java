@@ -122,6 +122,7 @@ public void setTransactions(ObservableList<Transaction> transactions) {
             Node transactionCell = loader.load();
             TransactionCellController cellController = loader.getController();
 
+
             cellController.setTransaction(t);
 
             cellController.setClickListener(clickListener);

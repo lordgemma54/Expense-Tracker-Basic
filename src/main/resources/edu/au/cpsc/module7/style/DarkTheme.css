@@ -7,3 +7,33 @@
     -fx-focus-color: #036E83;
     -fx-faint-focus-color: #036E8322;
 }
+
+
+/* Add button */
+/*.button.add-button {*/
+/*    -fx-background-color: #4caf50; !* muted green *!*/
+/*    -fx-text-fill: #f0f0f0;*/
+/*}*/
+
+.button.add-button{
+    -fx-background-color: transparent;
+}
+
+/* Delete button */
+.button.delete-button {
+    -fx-background-color: #d32f2f;
+    -fx-text-fill: white;
+}
+
+.root .button.cancel-button {
+    -fx-background-color: #d32f2f;
+    -fx-text-fill: white;
+}
+
+.root .button.save-button {
+    -fx-base: #242424 ;
+    -fx-control-inner-background: derive(-fx-base,20%);
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

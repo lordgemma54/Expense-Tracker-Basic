@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="detailListViewRoot" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.DetailListViewController">
+<AnchorPane fx:id="detailListViewRoot" styleClass="detail-view" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.DetailListViewController">
    <children>
       <GridPane fx:id="detailListView" maxWidth="Infinity" prefHeight="158.0" prefWidth="400" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <columnConstraints>
@@ -31,7 +31,7 @@
                <Label fx:id="amountInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                <Label fx:id="categoryInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                <Label fx:id="noteInfoDetail" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Button fx:id="hideButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHideButtonClicked" prefHeight="25.0" prefWidth="65.0" text="Hide" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
+            <Button fx:id="hideButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHideButtonClicked" prefHeight="25.0" prefWidth="65.0" styleClass="hide-button" text="Hide" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
            </children>
          <padding>
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
