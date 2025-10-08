@@ -126,11 +126,18 @@ private void onCancel() {
 
 //    -------------------------------new stuff from last night---------------------------------
 
-    public static Transaction showModal(Transaction transaction, Window owner) throws IOException {
+    public static Transaction showModal(Transaction transaction, Window owner, boolean darkTheme) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/edit-create-window-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         EditCreateWindowController controller = fxmlLoader.getController();
         controller.setTransactionToEdit(transaction);
+
+
+
+        String cssUrl = darkTheme ? EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/style/DarkTheme.css").toExternalForm() :
+                EditCreateWindowController.class.getResource("/edu/au/cpsc/module7/style/LightTheme.css").toExternalForm();
+
+        scene.getStylesheets().add(cssUrl);
 
         Stage stage = new Stage();
         if(owner != null) stage.initOwner(owner);

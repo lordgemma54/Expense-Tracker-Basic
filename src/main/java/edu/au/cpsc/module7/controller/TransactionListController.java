@@ -31,7 +31,13 @@ public class TransactionListController {
     @FXML
     private Button addNewTransactionButton;
 
+    private ExpenseTrackerAppController appController;
+
     private ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+
+    public void setAppController(ExpenseTrackerAppController appController) {//<-------------------------
+        this.appController = appController;
+    }
 
     public void initialize() throws IOException {
     addNewTransactionButton.setOnAction(event -> openCreateWindow());
@@ -101,7 +107,12 @@ public void setTransactions(ObservableList<Transaction> transactions) {
     }
 
     public void addNewTransactionCell(Transaction t){
-//        transactions.add(t);
+//        Window ownerWindow = addNewTransactionButton.getScene().getWindow();
+        Window ownerWindow = (addNewTransactionButton.getScene() != null) ?
+            addNewTransactionButton.getScene().getWindow() : null;
+
+        boolean dark = appController.isDarkThemeEnabled();
+
         try {
 
 //        URL fxmlLocation = getClass().getResource("/edu/au/cpsc/module7/transaction-cell.fxml");
@@ -136,7 +147,7 @@ public void setTransactions(ObservableList<Transaction> transactions) {
                         Window owner = addNewTransactionButton.getScene() != null ? addNewTransactionButton.getScene().getWindow() : null;
 
 //                        Window owner = addNewTransactionButton.getScene().getWindow();
-                        Transaction updatedTransaction = EditCreateWindowController.showModal(transaction, owner);
+                        Transaction updatedTransaction = EditCreateWindowController.showModal(transaction, owner, dark);
 
                         if(updatedTransaction != null) {
                             cellController.setTransaction(updatedTransaction);
@@ -165,8 +176,12 @@ public void setTransactions(ObservableList<Transaction> transactions) {
 
     private void openCreateWindow() {
     try{
-        Window ownerWindow = addNewTransactionButton.getScene().getWindow();
-        Transaction newTransaction = EditCreateWindowController.showModal(null, ownerWindow);
+        Window ownerWindow = (addNewTransactionButton.getScene() != null) ? addNewTransactionButton.getScene().getWindow():
+                null;
+
+        boolean dark = appController != null && appController.isDarkThemeEnabled();
+
+        Transaction newTransaction = EditCreateWindowController.showModal(null, ownerWindow, dark);
 
         if(newTransaction != null) {
             transactions.add(newTransaction);

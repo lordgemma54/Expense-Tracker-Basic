@@ -10,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 
-import java.net.URL;
-
 public class ExpenseTrackerAppController {
     @FXML
     private Parent applicationRoot;
@@ -39,6 +37,8 @@ public class ExpenseTrackerAppController {
 
     private Transaction selectedTransaction;
 
+    private boolean darkThemeEnabled = false;
+
     private final ObservableList<Transaction> transactions = FXCollections.observableArrayList(t ->
             new Observable[]{t.amountProperty()});
 
@@ -51,6 +51,8 @@ public class ExpenseTrackerAppController {
 
     @FXML
     public void initialize() {
+        transactionListController.setAppController(this);
+        totalsListController.setAppController(this);
 
         transactionListController.setTransactions(transactions);
         totalsListController.setTransactions(transactions);
@@ -70,7 +72,6 @@ public class ExpenseTrackerAppController {
 
         transactions.addAll(new Transaction("boba", "food", "fun with friends", 7.00),
                 new Transaction("ipad", "electronics", "for school", 975.50),
-                new Transaction("TP", "staples", "for butts", 17.85),
                 new Transaction("paycheck", "income", "for my sweat", 2000));
 //);
 
@@ -96,8 +97,9 @@ public class ExpenseTrackerAppController {
     }
 
     public void setTheme(String selection) {
-        URL testUrl = getClass().getResource("/edu/au/cpsc/module7/style/DarkTheme.css");
-        System.out.println(testUrl + "");
+//        URL testUrl = getClass().getResource("/edu/au/cpsc/module7/style/DarkTheme.css");
+//        System.out.println(testUrl + "");
+
         String darkThemeUrl = getClass().getResource("/edu/au/cpsc/module7/style/DarkTheme.css")
                 .toExternalForm();
         String lightThemeUrl = getClass().getResource("/edu/au/cpsc/module7/style/LightTheme.css")
@@ -110,5 +112,14 @@ public class ExpenseTrackerAppController {
             applicationRoot.getStylesheets().remove(darkThemeUrl);
         }
 
+    }
+
+    public boolean isDarkThemeEnabled(){
+        return applicationRoot.getStylesheets().stream().anyMatch(s -> s.contains("DarkTheme.css"));
+//                darkThemeEnabled;
+    }
+
+    public void setDarkThemeEnabled(boolean darkThemeEnabled){
+        this.darkThemeEnabled = darkThemeEnabled;
     }
 }
