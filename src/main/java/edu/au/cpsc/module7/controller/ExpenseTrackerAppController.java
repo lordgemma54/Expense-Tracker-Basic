@@ -5,11 +5,17 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 
+import java.net.URL;
+
 public class ExpenseTrackerAppController {
+    @FXML
+    private Parent applicationRoot;
+
     @FXML
     private Label currentBalanceLabel, totalIncomeLabel, totalExpensesLabel;
 
@@ -31,21 +37,28 @@ public class ExpenseTrackerAppController {
     @FXML
     private DetailListViewController detailListViewController;
 
+    private Transaction selectedTransaction;
+
     private final ObservableList<Transaction> transactions = FXCollections.observableArrayList(t ->
             new Observable[]{t.amountProperty()});
 
 
-public ObservableList<Transaction> getTransactions(){return transactions;}
+    public ObservableList<Transaction> getTransactions() {
+        return transactions;
+    }
 
 //    do all coordination here - ie. when a row is clicked, tell detailistView to show transactions
 
     @FXML
     public void initialize() {
 
-    transactionListController.setTransactions(transactions);
-    totalsListController.setTransactions(transactions);
+        transactionListController.setTransactions(transactions);
+        totalsListController.setTransactions(transactions);
+
+        totalsListController.setAppController(this); //<-------------------------
 
         transactionListController.setClickListener(transaction -> {
+            selectedTransaction = transaction;  //<-------------------------
             detailListViewController.showTransaction(transaction);
 
         });
@@ -56,9 +69,9 @@ public ObservableList<Transaction> getTransactions(){return transactions;}
         });
 
         transactions.addAll(new Transaction("boba", "food", "fun with friends", 7.00),
-        new Transaction("ipad", "electronics", "for school", 975.50),
-        new Transaction("TP", "staples", "for butts", 17.85),
-        new Transaction("paycheck", "income", "for my sweat", 2000));
+                new Transaction("ipad", "electronics", "for school", 975.50),
+                new Transaction("TP", "staples", "for butts", 17.85),
+                new Transaction("paycheck", "income", "for my sweat", 2000));
 //);
 
 //        Transaction t1 = new Transaction("boba", "food", "fun with friends", 7.00);
@@ -73,9 +86,29 @@ public ObservableList<Transaction> getTransactions(){return transactions;}
 
     }
 
-//    @FXML
-//    protected void editCreateWindowPopup() throws IOException {
-//        EditCreateWindowController.showModal(t1, editButton.getScene().getWindow());
-//    }
+    public void deleteSelectedTransaction() {
+        if (selectedTransaction != null) { //<-------------------------
+            transactions.remove(selectedTransaction);
+            detailListViewController.clearDetails();
+            detailListViewController.hideDetailView();
+            selectedTransaction = null;
+        }
+    }
 
+    public void setTheme(String selection) {
+        URL testUrl = getClass().getResource("/edu/au/cpsc/module7/style/DarkTheme.css");
+        System.out.println(testUrl + "");
+        String darkThemeUrl = getClass().getResource("/edu/au/cpsc/module7/style/DarkTheme.css")
+                .toExternalForm();
+        String lightThemeUrl = getClass().getResource("/edu/au/cpsc/module7/style/LightTheme.css")
+                .toExternalForm();
+        if (selection.equals("Dark")) {
+            applicationRoot.getStylesheets().add(darkThemeUrl);
+            applicationRoot.getStylesheets().remove(lightThemeUrl);
+        } else {
+            applicationRoot.getStylesheets().add(lightThemeUrl);
+            applicationRoot.getStylesheets().remove(darkThemeUrl);
+        }
+
+    }
 }

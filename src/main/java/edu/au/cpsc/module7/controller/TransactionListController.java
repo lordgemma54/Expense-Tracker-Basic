@@ -71,7 +71,14 @@ public void setTransactions(ObservableList<Transaction> transactions) {
                     addNewTransactionCell(t);
                 }
             }
-//            if(change.wasRemoved())
+            if(change.wasRemoved()) {
+                for (Transaction t : change.getRemoved()) {
+                    transactionList.getChildren().removeIf(node -> {
+                        Object data = node.getUserData();
+                        return data instanceof Transaction && data.equals(t);
+                    });
+                }
+            }
         }
     });
 //    refreshTransactionCells();
@@ -107,6 +114,8 @@ public void setTransactions(ObservableList<Transaction> transactions) {
             cellController.setTransaction(t);
 
             cellController.setClickListener(clickListener);
+
+            transactionCell.setUserData(t);
 
 //            ----------------------Delete-------------------------------------
 

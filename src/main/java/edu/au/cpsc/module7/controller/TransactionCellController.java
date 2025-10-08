@@ -55,11 +55,13 @@ public class TransactionCellController {
             }
         });
 
-        transactionCellDeleteButton.setOnAction(event -> {
-            if(deleteListener != null) {
-                deleteListener.onTransactionDelete(transaction, transactionCell);
-            }
-        });
+            onDeleteButtonClicked();
+
+//        transactionCellDeleteButton.setOnAction(event -> {
+//            if(deleteListener != null) {
+//                deleteListener.onTransactionDelete(transaction, transactionCell);
+//            }
+//        });
 
         transactionCellEditButton.setOnAction(event -> {
             if(editListener != null) {
@@ -104,9 +106,11 @@ public class TransactionCellController {
     @FXML
     private void onDeleteButtonClicked(){
         System.out.println("deleteButtonClicked");
-        if(clickListener != null) {
-
-        }
+        transactionCellDeleteButton.setOnAction(event -> {
+            if(deleteListener != null) {
+                deleteListener.onTransactionDelete(transaction, transactionCell);
+            }
+        });
     }
 
     @FXML

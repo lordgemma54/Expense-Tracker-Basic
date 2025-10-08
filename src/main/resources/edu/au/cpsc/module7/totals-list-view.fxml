@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -27,13 +28,24 @@
              <menus>
                  <Menu mnemonicParsing="false" text="File">
                      <items>
-                         <MenuItem mnemonicParsing="false" text="menuItemC.lose" />
+                         <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#closeMenuAction" text="Close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                      </items>
                  </Menu>
                  <Menu mnemonicParsing="false" text="Edit">
                      <items>
-                         <MenuItem mnemonicParsing="false" text="menuItemDelete" />
-                         <MenuItem mnemonicParsing="false" text="menuItemAppearance" />
+                         <MenuItem fx:id="menuItemDelete" mnemonicParsing="false" onAction="#deleteMenuAction" text="Delete" />
+                         <MenuItem fx:id="meunItemAppearance" mnemonicParsing="false" onAction="#appearanceMenuAction" text="Appearance">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem fx:id="menuItemDelete1" mnemonicParsing="false" onAction="#deleteMenuAction" text="Delete">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                      </items>
                  </Menu>
              </menus>
