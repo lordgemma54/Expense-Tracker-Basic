@@ -53,7 +53,7 @@ public class DetailListViewController {
             return;
         }
         itemInfoDetail.textProperty().set(t.getItem());
-        amountInfoDetail.textProperty().set(String.valueOf(t.getAmount()));
+        amountInfoDetail.textProperty().set(String.valueOf(Math.abs(t.getAmount())));
         categoryInfoDetail.textProperty().set(t.getCategory());
         noteInfoDetail.textProperty().set(t.getNote());
 

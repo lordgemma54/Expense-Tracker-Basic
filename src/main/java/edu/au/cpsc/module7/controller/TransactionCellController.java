@@ -46,8 +46,8 @@ public class TransactionCellController {
     }
 
     public void setTransactionCellAmountLabel(double amount) {
-        String amountPrefix = amount < 0 ? "-$" : "$";
-        transactionCellAmountLabel.textProperty().set(amountPrefix + String.valueOf(amount));
+//        String amountPrefix = amount < 0 ? "$" : "$";
+        transactionCellAmountLabel.textProperty().set("$" + String.valueOf(Math.abs(amount)));
     }
 
         public void initialize(){
