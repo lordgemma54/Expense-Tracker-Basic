@@ -1,4 +1,4 @@
-# --- Rahul Venkatesh Expense Tracker App ---
+# --- Expense Tracker App ---
 
 
 ## --- Inspiration --- 
